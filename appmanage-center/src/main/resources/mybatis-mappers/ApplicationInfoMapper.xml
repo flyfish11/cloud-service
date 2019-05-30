@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.appmanage.dao.ApplicationInfoDao">
+    <resultMap id="BaseResultMap" type="com.cloud.model.appmanage.ApplicationInfo">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="short_name" jdbcType="VARCHAR" property="shortName"/>
+        <result column="version" jdbcType="VARCHAR" property="version"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="belong_department" jdbcType="VARCHAR" property="belongDepartment"/>
+        <result column="accessory_id" jdbcType="VARCHAR" property="accessoryId"/>
+        <result column="application_unic_id" jdbcType="VARCHAR" property="applicationUnicId"/>
+        <result column="order_leve" jdbcType="INTEGER" property="orderLeve"/>
+        <result column="application_group" jdbcType="INTEGER" property="applicationGroup"/>
+        <result column="run_state" jdbcType="INTEGER" property="runState"/>
+        <result column="create_state" jdbcType="INTEGER" property="createState"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="logo_src" jdbcType="VARCHAR" property="logoSrc"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="authority_area" jdbcType="VARCHAR" property="authorityArea"/>
+        <result column="authority_owner" jdbcType="VARCHAR" property="authorityOwner"/>
+        <result column="authority_manager" jdbcType="VARCHAR" property="authorityManager"/>
+        <result column="project_repo_url" jdbcType="VARCHAR" property="projectRepoUrl"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, `name`, short_name, version, description, belong_department, accessory_id, application_unic_id,
+        order_leve, application_group, run_state, create_state, create_by, create_time, update_by,
+        update_time, logo_src, is_delete, authority_area, authority_owner, authority_manager, project_repo_url,type
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from p_application_imf
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from p_application_imf
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.cloud.model.appmanage.ApplicationInfo"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into p_application_imf (`id`,`name`, short_name, version,
+        description, belong_department, accessory_id,
+        application_unic_id, order_leve, application_group,
+        run_state, create_state, create_by,
+        create_time, update_by, update_time,
+        logo_src, is_delete, authority_area,
+        authority_owner, authority_manager,project_repo_url,type)
+        values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+        #{version,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR}, #{belongDepartment,jdbcType=VARCHAR}, #{accessoryId,jdbcType=VARCHAR},
+        #{applicationUnicId,jdbcType=VARCHAR}, #{orderLeve,jdbcType=INTEGER}, #{applicationGroup,jdbcType=INTEGER},
+        #{runState,jdbcType=INTEGER}, #{createState,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+        #{logoSrc,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{authorityArea,jdbcType=VARCHAR},
+        #{authorityOwner,jdbcType=VARCHAR}, #{authorityManager,jdbcType=VARCHAR}, #{projectRepoUrl,jdbcType=VARCHAR},
+        #{type,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id"
+            parameterType="com.cloud.model.appmanage.ApplicationInfo" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into p_application_imf
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="shortName != null">
+                short_name,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="belongDepartment != null">
+                belong_department,
+            </if>
+            <if test="accessoryId != null">
+                accessory_id,
+            </if>
+            <if test="applicationUnicId != null">
+                application_unic_id,
+            </if>
+            <if test="orderLeve != null">
+                order_leve,
+            </if>
+            <if test="applicationGroup != null">
+                application_group,
+            </if>
+            <if test="runState != null">
+                run_state,
+            </if>
+            <if test="createState != null">
+                create_state,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="logoSrc != null">
+                logo_src,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="authorityArea != null">
+                authority_area,
+            </if>
+            <if test="authorityOwner != null">
+                authority_owner,
+            </if>
+            <if test="authorityManager != null">
+                authority_manager,
+            </if>
+            <if test="projectRepoUrl != null">
+                project_repo_url
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null">
+                #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="belongDepartment != null">
+                #{belongDepartment,jdbcType=VARCHAR},
+            </if>
+            <if test="accessoryId != null">
+                #{accessoryId,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationUnicId != null">
+                #{applicationUnicId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderLeve != null">
+                #{orderLeve,jdbcType=INTEGER},
+            </if>
+            <if test="applicationGroup != null">
+                #{applicationGroup,jdbcType=INTEGER},
+            </if>
+            <if test="runState != null">
+                #{runState,jdbcType=INTEGER},
+            </if>
+            <if test="createState != null">
+                #{createState,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="logoSrc != null">
+                #{logoSrc,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="authorityArea != null">
+                #{authorityArea,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityOwner != null">
+                #{authorityOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityManager != null">
+                #{authorityManager,jdbcType=VARCHAR},
+            </if>
+            <if test="projectRepoUrl != null and projectRepoUrl != ''">
+                #{projectRepoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null and type != ''">
+                #{type,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateById" parameterType="com.cloud.model.appmanage.ApplicationInfo">
+        update p_application_imf
+        <set>
+            <if test="name != null and name != ''">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null and shortName != ''">
+                short_name = #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="version != null and version != ''">
+                version = #{version,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="belongDepartment != null and belongDepartment != ''">
+                belong_department = #{belongDepartment,jdbcType=VARCHAR},
+            </if>
+            <if test="accessoryId != null and accessoryId != ''">
+                accessory_id = #{accessoryId,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationUnicId != null and applicationUnicId != ''">
+                application_unic_id = #{applicationUnicId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderLeve != null">
+                order_leve = #{orderLeve,jdbcType=INTEGER},
+            </if>
+            <if test="applicationGroup != null">
+                application_group = #{applicationGroup,jdbcType=INTEGER},
+            </if>
+            <if test="runState != null">
+                run_state = #{runState,jdbcType=INTEGER},
+            </if>
+            <if test="createState != null">
+                create_state = #{createState,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="logoSrc != null and logoSrc != ''">
+                logo_src = #{logoSrc,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="authorityArea != null and authorityArea != ''">
+                authority_area = #{authorityArea,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityOwner != null and authorityOwner != ''">
+                authority_owner = #{authorityOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityManager != null and authorityManager != ''">
+                authority_manager = #{authorityManager,jdbcType=VARCHAR},
+            </if>
+            <if test="projectRepoUrl != null and projectRepoUrl != ''">
+                project_repo_url = #{projectRepoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findList" resultType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from p_application_imf
+        where 1=1
+        <if test="id != null">
+            and id=#{id}
+        </if>
+        <if test="name != null">
+            and name like concat('%', #{name}, '%')
+        </if>
+        <if test="shortName != null">
+            and short_name=#{shortName}
+        </if>
+        <if test="version != null">
+            and version=#{version}
+        </if>
+        <if test="description != null">
+            and description=#{description}
+        </if>
+        <if test="belongDepartment != null">
+            and belong_department=#{belongDepartment}
+        </if>
+        <if test="accessoryId != null">
+            and accessory_id=#{accessoryId}
+        </if>
+        <if test="applicationUnicId != null">
+            and application_unic_id=#{applicationUnicId}
+        </if>
+        <if test="orderLeve != null">
+            and order_leve=#{orderLeve}
+        </if>
+        <if test="applicationGroup != null">
+            and application_group=#{applicationGroup}
+        </if>
+        <if test="createState != null">
+            and create_state=#{createState}
+        </if>
+        <if test="runState != null">
+            and run_state=#{runState}
+        </if>
+        <if test="createBy != null">
+            and create_by=#{createBy}
+        </if>
+        <if test="createTime != null">
+            and create_time=#{createTime}
+        </if>
+        <if test="updateBy != null">
+            and update_by=#{updateBy}
+        </if>
+        <if test="updateTime != null">
+            and update_time=#{updateTime}
+        </if>
+        <if test="logoSrc != null">
+            and logo_src=#{logoSrc}
+        </if>
+        <if test="isDelete != null">
+            and is_delete = #{isDelete}
+        </if>
+        <if test="authorityArea != null">
+            and authority_area=#{authorityArea}
+        </if>
+        <if test="authorityOwner != null">
+            and authority_owner=#{authorityOwner}
+        </if>
+        <if test="authorityManager != null">
+            and authority_manager=#{authorityManager}
+        </if>
+        <if test="projectRepoUrl != null">
+            and project_repo_url=#{projectRepoUrl}
+        </if>
+        <if test="type != null">
+            and type=#{type}
+        </if>
+        order by create_time desc
+        <if test="start != null and length!=null">
+            limit #{start}, #{length}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from p_application_imf
+        where 1=1
+        <if test="id != null">
+            and id=#{id}
+        </if>
+        <if test="name != null">
+            and name like concat('%', #{name}, '%')
+        </if>
+        <if test="shortName != null">
+            and short_name=#{shortName}
+        </if>
+        <if test="version != null">
+            and version=#{version}
+        </if>
+        <if test="description != null">
+            and description=#{description}
+        </if>
+        <if test="belongDepartment != null">
+            and belong_department=#{belongDepartment}
+        </if>
+        <if test="accessoryId != null">
+            and accessory_id=#{accessoryId}
+        </if>
+        <if test="applicationUnicId != null">
+            and application_unic_id=#{applicationUnicId}
+        </if>
+        <if test="orderLeve != null">
+            and order_leve=#{orderLeve}
+        </if>
+        <if test="applicationGroup != null">
+            and application_group=#{applicationGroup}
+        </if>
+        <if test="createState != null">
+            and create_state=#{createState}
+        </if>
+        <if test="runState != null">
+            and run_state=#{runState}
+        </if>
+        <if test="createBy != null">
+            and create_by=#{createBy}
+        </if>
+        <if test="createTime != null">
+            and create_time=#{createTime}
+        </if>
+        <if test="updateBy != null">
+            and update_by=#{updateBy}
+        </if>
+        <if test="updateTime != null">
+            and update_time=#{updateTime}
+        </if>
+        <if test="logoSrc != null">
+            and logo_src=#{logoSrc}
+        </if>
+        <if test="isDelete != null">
+            and is_delete = #{isDelete}
+        </if>
+        <if test="authorityArea != null">
+            and authority_area=#{authorityArea}
+        </if>
+        <if test="authorityOwner != null">
+            and authority_owner=#{authorityOwner}
+        </if>
+        <if test="authorityManager != null">
+            and authority_manager=#{authorityManager}
+        </if>
+        <if test="projectRepoUrl != null">
+            and project_repo_url=#{projectRepoUrl}
+        </if>
+        <if test="type != null">
+            and type=#{type}
+        </if>
+    </select>
+
+    <select id="selectByNameAndBelongDepartment" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from p_application_imf
+        where `name`=#{name,jdbcType=VARCHAR} and belong_department=#{belongDepartment,jdbcType=VARCHAR} and
+        is_delete=#{isDelete,jdbcType=INTEGER}
+    </select>
+</mapper>

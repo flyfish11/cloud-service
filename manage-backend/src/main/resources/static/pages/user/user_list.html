@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.2</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="../../current/css/font.css">
+    <link rel="stylesheet" href="../../current/css/xadmin.css">
+    <link rel="stylesheet" href="../../lib/ztree/zTreeStyle.css">
+    <script src="../../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../current/js/xadmin.js"></script>
+    <script type="text/javascript" src="../../current/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../current/js/jq.js"></script>
+    <script type="text/javascript" src="../../current/js/admin.js"></script>
+    <script type="text/javascript" src="../../lib/ztree/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="../../current/js/common.js"></script>
+
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm3 layui-col-md3 layui-col-lg3 leftspan"  style="height: 400px" >
+            <div class="layui-card">
+                <div class="layui-card-body mini-bar">
+                    <div class="panel panel-default" style="height: 600px;overflow: auto;">
+                        <div class="panel-heading">组织机构</div>
+                        <div class="panel-body dept-tree">
+                            <ul id="deptTree" class="ztree"></ul>
+                            <!--<div id="rMenu" class="ztree">
+                                <ul>
+                                    <li id="m_add">
+                                        <#button name="增加子部门" icon="fa-plus" clickFun="MgrUser.openAddDept()"/>
+                                    </li>
+                                    <li id="m_del">
+                                        <#button name="编辑部门信息" icon="fa-edit" clickFun="MgrUser.openDeptDetail()"/>
+                                    </li>
+                                    <li id="m_check">
+                                        <#button name="删除部门节点" icon="fa-remove" clickFun="MgrUser.deleteDept()"/>
+                                    </li>
+                                </ul>
+                            </div>-->
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div  class="closetab" style="position:absolute;right: 0px;top:0px;">
+                    <i id="isColse" class="triangle-left"></i>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-col-md9 layui-col-sm9 layui-col-lg9 rightspan ">
+            <div class="layui-card">
+                <div class="layui-card-body ">
+                    <div class="layui-card-body">
+                        <div class="layui-form toolbar">
+                            <div class="layui-form-item">
+
+                                <div class="layui-inline">
+                                    <input id="depId"  type="hidden" />
+                                    <input id="username" class="layui-input" type="text" placeholder="账号/姓名/手机号"/>
+                                </div>
+                               <!-- <div class="layui-inline">
+                                    <input id="createTime" class="layui-input" type="text" placeholder="注册时间"/>
+                                </div>-->
+                                <div class="layui-inline">
+                                    <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="layui-table" id="userTable" lay-filter="userTable"></table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/html" id="tableBar">
+    <a class="layui-btn  layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn  layui-btn-xs" lay-event="delete">删除</a>
+    <a class="layui-btn   layui-btn-xs" lay-event="roleAssign">分配角色</a>
+    <a class="layui-btn  layui-btn-xs" lay-event="reset">重置密码</a>
+</script>
+<script type="text/javascript" src="../../current/modular/user/user_list.js"></script>
+<script type="text/javascript">
+    //组织结构收缩功能
+    $("#isColse").click(function(){
+        $(".leftspan").toggleClass('hideshow');
+        $(".rightspan").toggleClass('contentShow');
+        $(".triangle-left").toggleClass('triangle-right');
+    });
+</script>
+
+</html>

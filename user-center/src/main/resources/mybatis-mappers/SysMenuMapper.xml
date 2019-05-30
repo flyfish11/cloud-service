@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.user.dao.SysMenuDao">
+    <resultMap id="BaseResultMap" type="com.cloud.model.user.SysMenu">
+        <!--@mbg.generated-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="pId" jdbcType="VARCHAR" property="pId"/>
+        <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="menu_type" jdbcType="VARCHAR" property="menuType"/>
+        <result column="visible" jdbcType="CHAR" property="visible"/>
+        <result column="perms" jdbcType="VARCHAR" property="perms"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="application_id" jdbcType="VARCHAR" property="applicationId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, name, pId, order_num, url, menu_type, visible, perms, icon, create_by,
+        create_time, update_by, update_time, remark, application_id
+    </sql>
+    <select id="selectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        where id = #{menuId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from sys_menu
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.cloud.model.user.SysMenu">
+        <!--@mbg.generated-->
+        insert into sys_menu (id,name, pId, order_num,
+        url, menu_type, visible, perms,
+        icon, create_by, create_time,
+        update_by, update_time, remark
+        )
+        values (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER},
+        #{url,jdbcType=VARCHAR}, #{menuType,jdbcType=CHAR}, #{visible,jdbcType=CHAR}, #{perms,jdbcType=VARCHAR},
+        #{icon,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="menuId" parameterType="com.cloud.model.user.SysMenu"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="parentId != null">
+                pId,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="menuType != null">
+                menu_type,
+            </if>
+            <if test="visible != null">
+                visible,
+            </if>
+            <if test="perms != null">
+                perms,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="menuType != null">
+                #{menuType,jdbcType=CHAR},
+            </if>
+            <if test="visible != null">
+                #{visible,jdbcType=CHAR},
+            </if>
+            <if test="perms != null">
+                #{perms,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateMenu" parameterType="com.cloud.model.user.SysMenu">
+        <!--@mbg.generated-->
+        update sys_menu
+        <set>
+            <if test="name != null and name!=''">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="pId != null and pId!=''">
+                pId = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null and orderNum!=''">
+                order_num = #{orderNum,jdbcType=INTEGER},
+            </if>
+            <if test="url != null and url!=''">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="menuType != null and menuType!=''">
+                menu_type = #{menuType,jdbcType=CHAR},
+            </if>
+            <if test="visible != null and visible!=''">
+                visible = #{visible,jdbcType=CHAR},
+            </if>
+            <if test="perms != null and perms!=''">
+                perms = #{perms,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null and icon!=''">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="createBy != null and createBy!=''">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null and createTime!=''">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null and updateBy!=''">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null ">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null and remark!=''">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--auto generated by MybatisCodeHelper on 2019-04-28-->
+    <select id="selectSysMenu" resultType="com.cloud.model.user.SysMenu">
+
+        select
+        <include refid="Base_Column_List"/>
+        from sys_menu
+        where 1=1
+        <if test="name != null and name!=''">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="pId != null and  pId !=''">
+            and pId = #{pId,jdbcType=VARCHAR}
+        </if>
+        <if test="orderNum != null and orderNum !=''">
+            and order_num #{orderNum,jdbcType=INTEGER}
+        </if>
+        <if test="url != null and url!=''">
+            and url = #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="menuType != null and menuType!=''">
+            and menu_type = #{menuType,jdbcType=CHAR}
+        </if>
+        <if test="visible != null and visible!=''">
+            and visible=#{visible,jdbcType=CHAR}
+        </if>
+        <if test="perms != null and perms!=''">
+            and perms=#{perms,jdbcType=VARCHAR},
+        </if>
+        <if test="icon != null and icon!=''">
+            and icon=#{icon,jdbcType=VARCHAR}
+        </if>
+        <if test="createBy != null and createBy!=''">
+            and create_by#{createBy,jdbcType=VARCHAR}
+        </if>
+        <!-- <if test="createTime != null">
+             and create_time=#{createTime,jdbcType=TIMESTAMP}
+         </if>-->
+        <if test="updateBy != null and updateBy!=''">
+            and update_by=#{updateBy,jdbcType=VARCHAR}
+        </if>
+        <!-- <if test="updateTime != null">
+            and update_time = #{updateTime,jdbcType=TIMESTAMP}
+         </if>-->
+        <if test="remark != null and remark!=''">
+            and remark=#{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="applicationId != null and applicationId !=''">
+            and application_id =#{applicationId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+
+    <select id="selectZtreesMenu" resultType="com.cloud.model.common.ZTreeNode">
+        select id,pId , name from sys_menu
+        <if test="menuType != null and menuType eq 'C'.toString()">
+            WHERE menu_type = #{menuType ,jdbcType=VARCHAR}
+        </if>
+        order by order_num DESC
+    </select>
+
+
+    <select id="selectByRoles" resultMap="BaseResultMap">
+        select t.* from sys_menu t
+        inner join role_menu r on r.menuId = t.id
+        where
+        r.roleId in
+        <foreach collection="roleIds" index="index" item="roleId"
+                 open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+        and t.menu_type = 'C'
+    </select>
+
+    <select id="menuTreeListByroleId" resultType="com.cloud.model.common.ZTreeNode">
+    SELECT
+	m1.id AS id,
+	m1.pId,
+	m1.name AS name,
+	(
+	CASE
+	WHEN (m2.id IS NULL )
+	THEN 'false' ELSE 'true'
+	END
+	) AS open,
+	(
+	CASE
+	WHEN (m3.id IS NULL )
+	THEN 'false' ELSE 'true'
+	END
+	) as checked
+	FROM
+	sys_menu m1
+	LEFT JOIN sys_menu m2 ON m1.pId = m2.id
+	LEFT JOIN (SELECT rm.menuId AS id FROM role_menu rm where rm.roleId=#{roleId}) m3
+	ON m1.id = m3.id
+	ORDER BY
+	m1.id ASC
+    </select>
+
+    <delete id="delete">
+            delete from role_menu
+            <where>
+                <if test="roleId != null">
+                    and roleId = #{roleId}
+                </if>
+                <if test="menuId != null">
+                    and menuId = #{menuId}
+                </if>
+            </where>
+    </delete>
+
+
+</mapper>

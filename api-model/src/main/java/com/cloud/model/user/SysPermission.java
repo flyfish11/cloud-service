@@ -1,0 +1,26 @@
+package com.cloud.model.user;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import lombok.Data;
+
+/**
+ * 权限标识
+ * 
+ * @author hlxd
+ *
+ */
+@Data
+public class SysPermission implements Serializable {
+
+	private static final long serialVersionUID = 280565233032255804L;
+
+	private String id;
+	private String permission;
+	private String name;
+	private Date createTime;
+	private Date updateTime;
+	private String applicationId;
+
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>流程图</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="../../current/css/font.css">
+  <link rel="stylesheet" href="../../current/css/xadmin.css">
+  <link rel="stylesheet" href="../../lib/ztree/zTreeStyle.css">
+  <script src="../../lib/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../../current/js/xadmin.js"></script>
+  <script type="text/javascript" src="../../current/js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="../../current/js/jq.js"></script>
+</head>
+
+<body>
+<div class="x-body">
+  <form class="layui-form layui-form-pane" style="margin-left: 20px;">
+    <div id="image" style="width:100%;height:100%;overflow: auto;">
+      <div class="layui-form-item">
+        <!--<image id="showImages1" style="display: none;"></image>-->
+        <image id="showImages2"></image>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  //alert(getUrlParam("processInstanceId"));
+  var countNum = 0;
+  // $('#image').css('height',document.body.offsetHeight);
+  layui.use(['form', 'layer'], function () {
+    $ = layui.jquery;
+    //执行AJAX 获取数据
+    $.getJSON(domainName +'/api-wf/processTracking/'+getUrlParam("processInstanceId"), function (json) {
+      // alert(JSON.stringify(json));
+      var imgObj2 = document.getElementById("showImages2")
+      imgObj2.src = "data:image/png;base64," + json.msg;
+    });
+
+  });
+</script>
+</body>
+
+</html>

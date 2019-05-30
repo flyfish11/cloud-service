@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<title>登录</title>
+	<link href="current/css/login.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div class="login">
+	<div class="message">工业互联网平台</div>
+	<div id="darkbannerwrap"></div>
+
+	<form id="login-form" method="post" onsubmit="return false;">
+		<input id="account" name="account" placeholder="用户名" type="text"
+			   autocomplete="off">
+		<hr class="hr15">
+		<input id="password" name="password" placeholder="密码" type="password"
+			   autocomplete="off">
+		<hr class="hr15">
+		<button style="width: 100%;" type="submit"
+				onclick="login(this)">登录</button>
+		<hr class="hr20">
+		<a href="login-sms.html">短信登陆</a>
+		<span id="info" style="color: red"></span>
+	</form>
+
+
+</div>
+
+</body>
+
+<script src="current/js/jquery-3.3.1.min.js"></script>
+<script src="current/js/jq.js"></script>
+<script type="text/javascript">
+	if (top != self) {
+		parent.location.href = localStorage.getItem("loginUrl");
+	}
+
+	var access_token = localStorage.getItem("access_token");
+	if (access_token != null && access_token.trim().length != 0) {
+		$.ajax({
+			type : 'get',
+			url : domainName + '/api-u/users/current?access_token=' + access_token,
+			success : function(data) {
+				location.href = 'http://api.gateway.com/api/api-b/index.html';
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				if (xhr.status == 401) {
+					localStorage.removeItem("access_token");
+				}
+			}
+		});
+	}
+
+	function login(obj) {
+		$(obj).attr("disabled", true);
+
+		var account = $.trim($('#account').val());
+		var password = $.trim($('#password').val());
+		if (account == "" || password == "") {
+			$("#info").html('用户名或者密码不能为空');
+			$(obj).attr("disabled", false);
+		} else {
+			$.ajax({
+				type : 'post',
+				url : domainName + '/sys/login',
+				timeout : 5000, //超时时间设置，单位毫秒
+				data : $("#login-form").serialize(),
+				success : function(data) {
+					//将access_token和refresh_token写入本地
+					localStorage.setItem("access_token", data.access_token);
+					localStorage.setItem("refresh_token", data.refresh_token);
+					//将登陆url写入本地
+					localStorage.setItem("loginUrl", location.href);
+					location.href = 'http://api.gateway.com/api/api-b/index.html';
+				},
+				error : function(xhr, textStatus, errorThrown) {
+					$(obj).attr("disabled", false);
+					if(textStatus == 'timeout') {
+						$("#info").html("登陆超时,请重试");
+						return;
+					}
+					var msg = xhr.responseText;
+					if(msg == undefined){
+						$("#info").html("请重试");
+					} else {
+						var response = JSON.parse(msg);
+						var message = response.error_description;
+						if(message == undefined){
+							message = response.message;
+						}
+						$("#info").html(message);
+					}
+				}
+			});
+		}
+	}
+</script>
+</html>

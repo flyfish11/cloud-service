@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.2</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8"/>
+    <link rel="stylesheet" href="../current/css/font.css">
+    <link rel="stylesheet" href="../current/css/xadmin.css">
+    <script src="../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../current/js/xadmin.js"></script>
+    <script type="text/javascript" src="../current/js/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="../current/js/highcharts/highcharts-more.js"></script>
+    <script type="application/javascript" src="../current/js/highcharts/echarts-all.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<style type="text/css">
+
+</style>
+
+<body>
+<div class="layui-fluid">
+
+
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-sm4 layui-col-md4">
+            <div class="layui-row grid-demo" style="background:#5cb85c;border-radius: 6px">
+                <div class="layui-col-md3 layui-col-sm3">
+                    <div class="avatar-circular">
+                        <i class="layui-icon layui-icon-template-1" style="font-size: 30px;"></i>
+                    </div>
+
+                </div>
+                <div class="layui-col-md9 layui-col-sm9">
+                    <span class="title">应用数   </span>
+                    <span class="title1">2341.02</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="layui-col-sm4 layui-col-md4 ">
+            <div class="layui-row grid-demo" style="background:#428bca;border-radius: 6px;">
+                <div class="layui-col-md3 layui-col-sm3">
+                    <div class="avatar-circular">
+                        <i class="layui-icon layui-icon-template-1" style="font-size: 30px;"></i>
+                    </div>
+
+                </div>
+                <div class="layui-col-md9 layui-col-sm9">
+                    <span class="title">应用数   </span>
+                    <span class="title1">2341.02</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="layui-col-sm4 layui-col-sm4">
+            <div class="layui-row grid-demo" style="background:#4E515c;    border-radius: 6px;">
+                <div class="layui-col-md3 layui-col-sm3">
+                    <div class="avatar-circular">
+                        <i class="layui-icon layui-icon-template-1" style="font-size: 30px;"></i>
+                    </div>
+
+                </div>
+                <div class="layui-col-md9 layui-col-sm9">
+                    <span class="title">应用数   </span>
+                    <span class="title1">2341.02</span>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="layui-row layui-col-space15">
+
+
+        <div class="layui-col-md4 layui-col-sm4 message">
+            <div class="layui-card">
+                <div class="layui-card-header">消息</div>
+                <div class="layui-card-body">
+                    <div class="dynamic-list">
+                        <ul>
+                            <li>[公告]&nbsp;&nbsp;&nbsp;&nbsp;数采服务升级成功</li>
+                            <li>[审批]&nbsp;&nbsp;&nbsp;&nbsp;应用上架审批通过</li>
+                            <li>[工作]&nbsp;&nbsp;&nbsp;&nbsp;微服务开发</li>
+                            <li>[通知]&nbsp;&nbsp;&nbsp;&nbsp;五一放假日期通知</li>
+                            <li>[公告]&nbsp;&nbsp;&nbsp;&nbsp;工业互联网 平台即将发布正式版本</li>
+                            <li>[代办]&nbsp;&nbsp;&nbsp;&nbsp;数据采集服务开展</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="layui-col-md8 layui-col-sm8">
+            <div class="layui-card">
+                <div class="layui-card-header">近20小时网关调取量</div>
+                <div class="layui-card-body">
+
+                    <div id="main" style="height: 320px;"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md4 layui-col-sm4">
+            <div class="layui-row grid-demo" style="background:#FFFFFF;border-radius: 6px">
+                <div class="layui-col-md12  layui-col-sm12  ">
+                    <div class="layui-card-header">近1小时服务调用TOP5</div>
+                </div>
+
+                <div class="layui-col-md12 layui-col-sm12">
+                    <div id="chartContainer" style="height: 250px;widows: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4 layui-col-sm4">
+            <div class="layui-row grid-demo" style="background:#FFFFFF;border-radius: 6px">
+                <div class="layui-col-md12  layui-col-sm12  ">
+                    <div class="layui-card-header">接口请求量调用TOP10</div>
+                </div>
+
+                <div class="layui-col-md12 layui-col-sm12">
+                    <div id="containertp10" style="height: 250px;width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md4 layui-col-sm4">
+            <div class="layui-row grid-demo" style="background:#FFFFFF;border-radius: 6px">
+                <div class="layui-col-md12  layui-col-sm12  ">
+                    <div class="layui-card-header">服务异常TOP10</div>
+                </div>
+
+                <div class="layui-col-md12 layui-col-sm12">
+                    <div id="container" style="height: 250px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/x-javascript">
+    	
+    var chart = Highcharts.chart('main',{
+	chart: {
+		type: 'area'
+	},
+	title: {
+		text: null
+	},
+	
+	xAxis: {
+		allowDecimals: false
+	},
+	yAxis: {
+		title: {
+			text: '网关调取量'
+		},
+		labels: {
+			formatter: function () {
+				return this.value / 1000 + '次';
+			}
+		}
+	},
+	tooltip: {
+		pointFormat: '{series.name} 读取数<b>{point.y:,.0f}</b>数量'
+	},
+	plotOptions: {
+		area: {
+			pointStart: 1940,
+			marker: {
+				enabled: false,
+				symbol: 'circle',
+				radius: 2,
+				states: {
+					hover: {
+						enabled: true
+					}
+				}
+			}
+		}
+	},
+	series: [{
+		name: '工业互联网平台',
+		data: [null, null, null, null, null, 6, 11, 32, 110, 235, 369, 640,
+			   1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
+			   27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+			   26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+			   24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+			   22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+			   10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+	}]
+});
+    	
+    	
+   var chart = Highcharts.chart('container', {
+	chart: {
+		type: 'spline'
+	},
+	title: {
+		text: null
+	},
+	subtitle: {
+		text: null
+	},
+	xAxis: {
+		categories: ['5.12', '5.13', '5.14', '5.15', '5.16', '5.17',
+					 '5.18', '5.19', '5.29']
+	},
+	yAxis: {
+		title: {
+			text: '请求量'
+		},
+		labels: {
+			formatter: function () {
+				return this.value + '°';
+			}
+		}
+	},
+	tooltip: {
+		crosshairs: true,
+		shared: true
+	},
+	plotOptions: {
+		spline: {
+			marker: {
+				radius: 4,
+				lineColor: '#666666',
+				lineWidth: 1
+			}
+		}
+	},
+	series: [{
+		name: '服务异常TOP10',
+		marker: {
+			symbol: 'square'
+		},
+		data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, {
+			y: 26.5,
+			marker: {
+
+			}
+		}, 23.3, 18.3, 13.9, 9.6]
+	}]
+});
+ 	
+   var chart = Highcharts.chart('containertp10', {
+	chart: {
+		type: 'spline'
+	},
+	title: {
+		text: null
+	},
+	subtitle: {
+		text: null
+	},
+	xAxis: {
+		type: 'datetime',
+		title: {
+			text: null
+		}
+	},
+	colors: ['#6CF', '#39F', '#06C', '#036', '#000'],
+	yAxis: {
+		title: {
+			text: '数量（次）'
+		},
+		min: 0
+	},
+	tooltip: {
+		headerFormat: '<b>{series.name}</b><br>',
+		pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+	},
+	plotOptions: {
+		spline: {
+			marker: {
+				enabled: true
+			}
+		}
+	},
+	series: [{
+		name: '4月至5月',
+		// Define the data points. All series have a dummy year
+		// of 1970/71 in order to be compared on the same x axis. Note
+		// that in JavaScript, months start at 0 for January, 1 for February etc.
+		data: [
+			[Date.UTC(1970,  9, 27), 0   ],
+			[Date.UTC(1970, 10, 10), 0.6 ],
+			[Date.UTC(1970, 10, 18), 0.7 ],
+			[Date.UTC(1970, 11,  2), 0.8 ],
+			[Date.UTC(1970, 11,  9), 0.6 ],
+			[Date.UTC(1970, 11, 16), 0.6 ],
+			[Date.UTC(1970, 11, 28), 0.67],
+			[Date.UTC(1971,  0,  1), 0.81],
+			[Date.UTC(1971,  0,  8), 0.78],
+			[Date.UTC(1971,  0, 12), 0.98],
+			[Date.UTC(1971,  0, 27), 1.84],
+			[Date.UTC(1971,  1, 10), 1.80],
+			[Date.UTC(1971,  1, 18), 1.80],
+			[Date.UTC(1971,  1, 24), 1.92],
+			[Date.UTC(1971,  2,  4), 2.49],
+			[Date.UTC(1971,  2, 11), 2.79],
+			[Date.UTC(1971,  2, 15), 2.73],
+			[Date.UTC(1971,  2, 25), 2.61],
+			[Date.UTC(1971,  3,  2), 2.76],
+			[Date.UTC(1971,  3,  6), 2.82],
+			[Date.UTC(1971,  3, 13), 2.8 ],
+			[Date.UTC(1971,  4,  3), 2.1 ],
+			[Date.UTC(1971,  4, 26), 1.1 ],
+			[Date.UTC(1971,  5,  9), 0.25],
+			[Date.UTC(1971,  5, 12), 0   ]
+		]
+	}]
+});
+      var myChart = echarts.init(document.getElementById('chartContainer'));
+    	
+    	option = {
+    title: null,
+    grid: {
+        borderWidth: 0,
+        y: 80,
+        y2: 60
+    },
+    xAxis: [
+        {
+            type: 'category',
+            show: false,
+            data: ['服务1', '服务2', '服务3', '服务4', '服务5','服务6','服务7']
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            show: false
+        }
+    ],
+    series: [
+        {
+            name: 'ECharts例子个数统计',
+            type: 'bar',
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+'#4a89dc',  ' #18b5f9',   '#21b06e',  '#92cf68',  '#f7774a',
+                          '#fab400',   '#b77def'
+                        ];
+                        return colorList[params.dataIndex]
+                    },
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{b}\n{c}'
+                    }
+                }
+            },
+            data: [12,21,10,4,12,5,6,5,25,23,7],
+            markPoint: {
+                tooltip: {
+                    trigger: 'item',
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    formatter: function(params){
+                        return '<img src="' 
+                                + params.data.symbol.replace('image://', '')
+                                + '"/>';
+                    }
+                },
+                data: [
+                      ]
+            }
+        }
+    ]
+};
+    	myChart.setOption(option); 
+    	
+    	
+    	
+
+</script>
+
+</html>

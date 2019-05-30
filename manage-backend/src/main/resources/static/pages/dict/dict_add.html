@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加字典</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="../../current/css/font.css">
+    <link rel="stylesheet" href="../../current/css/xadmin.css">
+    <link rel="stylesheet" href="../../lib/ztree/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="../../current/css/myZtree.css">
+
+    <script src="../../lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../../current/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../current/js/jq.js"></script>
+    <script type="text/javascript" src="../../lib/ztree/jquery.ztree.all.min.js"></script>
+    <script type="text/javascript" src="../../current/js/selectTree.js"></script>
+
+
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <form id="menuForm" lay-filter="menuForm" class="layui-form model-form"  >
+            <input name="id" type="hidden"/>
+
+            <div class="layui-col-md4    layui-col-sm4">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">编码类型</label>
+                    <div class="layui-input-block">
+                        <input name="dictCode" placeholder="编码类型" type="text" id="dictCode" class="layui-input" lay-verify="required" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md4    layui-col-sm4">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">类型名称</label>
+                    <div class="layui-input-block">
+                        <input  placeholder="类型名称" type="text" class="layui-input" name="dictName" id="dictName" lay-verify="required" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md4    layui-col-sm4" style=" text-align: center;">
+                <button class="layui-btn" id="AddMoreFileBox" class="btn layui-btn-normal ">添加</button>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input  placeholder="备注" style="width: 580px" type="text" class="layui-input" name="dictTips" id="dictTips"/>
+                   <!-- <textarea name="dictTips" placeholder="请输入内容" class="layui-textarea"  id="dictTips"></textarea>-->
+                </div>
+            </div>
+            <div id="Inputs" style="margin-left: 70px;margin-top:20px"></div>
+
+            <div class="layui-form-item text-right" style="text-align: center;margin-top: 20px">
+                <button class="layui-btn " type="button" ew-event="closeDialog"  id="butCancle">取消</button>
+                <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="../../current/modular/dict/dict_add.js"></script>
+    <script type="text/javascript">
+
+</script>
+</body>
+
+</html>

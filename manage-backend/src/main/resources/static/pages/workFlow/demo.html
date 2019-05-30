@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jq.js"></script>
+    <script type="text/javascript" src="../../layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/my/permission.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/constant.js"></script>
+</head>
+
+<body>
+<div style="padding:0px 10px 0px 10px">
+    <header class="layui-form-item" style="margin-bottom: 0px!important;">
+        <form id="searchForm" onsubmit="return false">
+
+            <label class="layui-form-label" style="width: auto">编号:</label>
+            <div class="layui-input-inline" style="width: 100px;margin-right: 0px;">
+                <input type="text" name="id" placeholder="编号" class="layui-input">
+            </div>
+            <label class="layui-form-label" style="width: auto">流程名称:</label>
+            <div class="layui-input-inline" style="width: 100px;" style="padding-right: 0px;">
+                <input type="text" id="name" name="name" placeholder="流程名称" class="layui-input">
+            </div>
+            <label class="layui-form-label" style="width: auto">key:</label>
+            <div class="layui-input-inline" style="width: 120px;padding-right: 0px;">
+                <input readonly id="key" type="text" name="key" placeholder="key" class="layui-input">
+            </div>
+            <div class="layui-form-mid">-</div>
+            <div class="layui-input-inline" style="width: 120px;padding-right: 0px; ">
+                <input readonly type="text" id="endTime" name="endTime" lay-verify="date" placeholder="修改时间"
+                       class="layui-input">
+            </div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <button id="reload" class="layui-btn" onClick="search();">搜索</button>
+            </div>
+            <div class="layui-input-inline" style="width: 100px;">
+                <button class="layui-btn" data-type="reload" onclick="javascript:location.href = 'createTask.html' ">
+                    创建任务
+                </button>
+            </div>
+        </form>
+    </header>
+    <div class="widget-body no-padding">
+        <table id="dt-table" class="layui-hide" lay-size="lg" lay-filter="dt-table"></table>
+    </div>
+
+</div>
+</div>
+</body>
+<!--操作按钮-->
+<script type="text/html" id="options">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">跟踪</a>
+
+</script>
+<script type="text/javascript">
+    var pers = checkPermission();
+
+    var lay = layui.use(['element', 'layer', 'form', 'upload', 'table', 'laydate'], function () {
+        var table = layui.table; //很重要
+        var loading = layer.load()
+        table.render({
+            elem: '#dt-table',
+            url: domainName + '/api-wf/process/queryProcessInstance',
+            id: 'taskServiceLayui',
+            height: 'full-60',
+            cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            cols: [
+                [
+                    {field: 'id', title: '编号'},
+                    {field: 'name', title: '流程名称'},
+                    {field: 'key', title: 'key'},
+                    {field: 'category', title: '类别'},
+                    {field: 'createTime', title: '创建时间'},
+                    {field: 'lastUpdateTime', title: '最后更新时间'},
+                    {field: 'version', title: '版本'},
+                    {field: 'metaInfo', title: '元信息'},
+                    {field: 'deploymentId', title: '部署id'},
+                    {field: 'tenantId', title: '租用id'},
+                    {field: 'hasEditorSource', title: '编辑资源'},
+                    {field: 'options', title: '操作', width: 160, align: 'center', toolbar: '#options'}
+                ]
+            ],
+            done: function () {
+                layer.close(loading);
+            },
+            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'layer', 'skip'], //自定义分页布局
+                curr: 1,//设定初始在第 5 页
+                groups: 5, //只显示 1 个连续页码
+            }
+        });
+        var laydate = layui.laydate;
+        //日期时间选择器
+        laydate.render({
+            elem: '#startTime',
+        });
+        var laydate = layui.laydate;
+        //日期时间选择器
+        laydate.render({
+            elem: 'endTime',
+
+        });
+        //监听工具条
+        table.on('tool(dt-table)', function (obj) {
+            //layer.alert(data.classifyId);
+            var data = obj.data;
+            console.log(data)
+            if (obj.event === 'edit') {
+                layer.open({
+                    id: 'leave-image',
+                    type: 2,
+                    area: [ '880px', '400px'],
+                    fix: false,
+                    maxmin: true,
+                    shadeClose: false,
+                    shade: 0.4,
+                    title: '流程图',
+                    content:  'shinePics.html?processInstanceId='+data.id
+                });
+            }
+        });
+
+    });
+
+    //搜索
+    function search() {
+        var parm = $("#searchForm").serializeObject();
+        lay.table.reload("taskServiceLayui", { //此处是上文提到的 初始化标识id
+            where: parm
+        });
+    }
+    //删除
+    function delRow(data) {
+        $.ajax({
+            url: domainName + '/api-dt/dictionaryTable/delete/' + data.classifyId,
+            type: "delete",
+            beforeSend: function () {
+                index = layer.load();
+            },
+            datatype: JSON,
+            success: function (result) {
+                layer.close(index);
+                layer.closeAll('dialog');//关闭弹窗
+                //刷新界面
+                lay.table.reload("taskServiceLayui", { //此处是上文提到的 初始化标识id
+                });
+            }
+        });
+    }
+</script>
+
+</html>

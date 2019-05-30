@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>文件上传</title>
+    <link rel="stylesheet" href="../../lib/layui/css/layui.css"  media="all" />
+</head>
+<body>
+
+<center>
+
+    <h1 id="mytitle" style="margin-bottom: 30px;margin-top: 30px">jar包上传</h1>
+
+    <div id="uploader" class="wu-example">
+        <!--用来存放文件信息-->
+
+        <div id="thelist" class="uploader-list"></div>
+       <!-- <div class="layui-form-item">
+
+            &lt;!&ndash; <div class="layui-inline">
+                 <input id="timeLimit" class="layui-input" type="text" placeholder="注册时间"/>
+             </div>&ndash;&gt;
+            <div class="layui-inline">
+                <div id="" class=""><h4 class="info">文件名</h4>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div id="" class=" "><p class="state">等待上传...</p>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="layui-form-item">
+
+            <!-- <div class="layui-inline">
+                 <input id="timeLimit" class="layui-input" type="text" placeholder="注册时间"/>
+             </div>-->
+            <div class="layui-inline">
+                <div id="picker" class=""><i class="layui-icon">&#xe615;</i>选择文件
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div id="ctlBtn" class="layui-btn icon-btn "><i class="layui-icon">&#xe654;</i>开始上传
+                </div>
+            </div>
+        </div>
+
+        <div id="jindutiao" class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="demo" style="width: 50%">
+            <div class="layui-progress-bar layui-bg-red" lay-percent="0%"></div>
+        </div>
+
+        <!--<div class="btns">
+            <div id="picker">选择文件</div>
+            <button id="ctlBtn" class="btn btn-default">开始上传</button>
+        </div>-->
+    </div>
+
+
+</center>
+
+
+<link rel="stylesheet" type="text/css" href="../../lib/webuploader/webuploader.css" />
+<script type="text/javascript" src="../../lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../current/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../current/js/jq.js"></script>
+<script src="../../lib/webuploader/webuploader.js"></script>
+
+<script>
+    var element=null;
+    var url=null;
+
+    var uploader = WebUploader.create({
+        // swf文件路径
+        swf: '/js/webuploader/Uploader.swf',
+        // 文件接收服务端。
+        server: "http://127.0.0.1:8091/uploadfile",
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#picker',
+
+        //分块
+        chunked: true,
+        auto: false,
+        disableGlobalDnd: true,
+        chunkSize:1024*1024,//1M 为一分片
+        fileNumLimit: 1024,
+        fileSizeLimit: 1024 * 1024 * 1024,    // 200 M
+        fileSingleSizeLimit: 1024 * 1024 * 1024,    // 50 M
+
+        // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+        resize: false
+    });
+
+
+    var $list = $("#thelist");
+    var $btn = $('#ctlBtn');
+
+    // 当有文件被添加进队列的时候
+    uploader.on( 'fileQueued', function( file ) {
+
+        $list.append(" <div  class=\"layui-inline\">\n" +
+            "                <div id=\"\" class=\"\"><h4 class=\"info\">"+file.name+"</h4>\n" +
+            "                </div>\n" +
+            "            </div>\n" +
+            "            <div class=\"layui-inline\">\n" +
+            "                <div id='"+file.id+"' class=\" \"><p class=\"state\">等待上传...</p>\n" +
+            "                </div>\n" +
+            "            </div>");
+
+    });
+
+    //开始上传
+    $btn.on( 'click', function() {
+        uploader.upload();
+    });
+
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on( 'uploadProgress', function( file, percentage ) {
+        console.log(parseInt(percentage*100)+'%');
+        $("#jindutiao").show();
+        element.progress('demo', parseInt(percentage*100)+'%')
+    });
+
+    uploader.on( 'uploadSuccess', function( file ,object ) {
+        $( '#'+file.id ).find('p.state').text('已上传');
+        console.log(object)
+
+        for(i in object ){
+            url = object[i];
+        }
+
+        console.log("已上传:"+url);
+
+       // $("#mytitle").html("上传访问地址为："+url);
+
+    });
+
+    uploader.on( 'uploadError', function( file ) {
+        $( '#'+file.id ).find('p.state').text('上传出错');
+    });
+
+    uploader.on( 'uploadComplete', function( file ) {
+
+        console.log("上传完成");
+
+    });
+
+    //进度条相关
+    $(document).ready(function(){
+        $("#jindutiao").hide();
+        layui.use('element', function(){
+            element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        });
+    });
+
+</script>
+
+</body>
+</html>

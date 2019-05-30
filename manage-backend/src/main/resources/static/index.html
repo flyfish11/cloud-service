@@ -1,0 +1,427 @@
+﻿<!doctype html>
+<html class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>微服务平台</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="stylesheet" type="text/css" href="current/css/font.css">
+
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <link rel="stylesheet" href="current/css/xadmin.css">
+    <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+
+    <script type="text/javascript" src="current/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="current/js/jquery.cookie.js"></script>
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="current/js/xadmin.js"></script>
+
+    <script type="text/javascript" src="current/js/jq.js"></script>
+
+
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <script>
+        // 是否开启刷新记忆tab功能
+        // var is_remember = false;
+    </script>
+</head>
+<body class="index">
+<!-- 顶部开始 -->
+<div class="container">
+    <div class="logo">
+        <a href="./index.html">
+            <img src="current/images/logo.png">
+        </a>
+
+
+    </div>
+    <div style="display: none" id="newPage">
+        <iframe  frameborder="0" scrolling="yes" class="x-iframe" id="autoLoginFrame">
+            <script>
+                window.onload = function(){
+                    alert("我在加載！")
+                }
+            </script>
+        </iframe>
+    </div>
+    <div style="display: none" id="harbor">
+        <iframe  frameborder="0" scrolling="yes" class="x-iframe" id="autoLoginFrameharbor" src="http://10.130.86.36">
+        </iframe>
+    </div>
+    <div class="left_open">
+        <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
+    </div>
+    <!--<ul class="layui-nav left fast-add" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;">+新增</a>
+            <dl class="layui-nav-child">
+                &lt;!&ndash; 二级菜单 &ndash;&gt;
+                <dd>
+                    <a onclick="xadmin.open('最大化','http://www.baidu.com','','',true)">
+                        <i class="iconfont">&#xe6a2;</i>弹出最大化</a></dd>
+                <dd>
+                    <a onclick="xadmin.open('弹出自动宽高','http://www.baidu.com')">
+                        <i class="iconfont">&#xe6a8;</i>弹出自动宽高</a></dd>
+                <dd>
+                    <a onclick="xadmin.open('弹出指定宽高','http://www.baidu.com',500,300)">
+                        <i class="iconfont">&#xe6a8;</i>弹出指定宽高</a></dd>
+                <dd>
+                    <a onclick="xadmin.add_tab('在tab打开','member-list.html')">
+                        <i class="iconfont">&#xe6b8;</i>在tab打开</a></dd>
+                <dd>
+                    <a onclick="xadmin.add_tab('在tab打开刷新','member-del.html',true)">
+                        <i class="iconfont">&#xe6b8;</i>在tab打开刷新</a></dd>
+            </dl>
+        </li>
+    </ul>-->
+    <ul class="layui-nav right" lay-filter="">
+        <li class="layui-nav-item">
+            <a href="javascript:;">admin</a>
+            <dl class="layui-nav-child">
+                <!-- 二级菜单 -->
+                <dd>
+                    <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                <dd>
+                    <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
+                <dd>
+                    <a href="javascript:;" onclick="logout()">退出</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item to-index">
+            <a href="/">前台首页</a></li>
+    </ul>
+</div>
+<!-- 顶部结束 -->
+<!-- 中部开始 -->
+<!-- 左侧菜单开始 -->
+<div class="left-nav">
+    <div id="side-nav">
+        <ul id="nav">
+
+        </ul>
+    </div>
+</div>
+<!-- <div class="x-slide_left"></div> -->
+<!-- 左侧菜单结束 -->
+<!-- 右侧主体开始 -->
+<div class="page-content">
+    <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+        <ul class="layui-tab-title">
+            <li class="home">
+                <i class="layui-icon">&#xe68e;</i>我的桌面
+            </li>
+        </ul>
+        <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+            <dl>
+                <dd data-type="this">关闭当前</dd>
+                <dd data-type="other">关闭其它</dd>
+                <dd data-type="all">关闭全部</dd>
+            </dl>
+        </div>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <iframe src='pages/welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+            </div>
+        </div>
+        <div id="tab_show"></div>
+    </div>
+</div>
+<div class="page-content-bg"></div>
+<style id="theme_style"></style>
+<!-- 右侧主体结束 -->
+
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://api.gateway.com/api/api-b/autoLogin/login",
+            async: false,
+            type: "HEAD",
+            complete: function (xhr, data) {
+               // console.log(xhr);
+                wpoInfo = {
+// 服务器端时间
+                    "Cookie": xhr.getResponseHeader('Cookie'),
+                    "originCookie": xhr.getResponseHeader('originCookie'),
+// 如果开启了gzip，会返回这个东西
+                    "contentEncoding": xhr.getResponseHeader('Content-Encoding'),
+// keep-alive ？ close？
+                    "connection": xhr.getResponseHeader('Connection'),
+// 响应长度
+                    "contentLength": xhr.getResponseHeader('Content-Length'),
+// 服务器类型，apache？lighttpd？
+                    "server": xhr.getResponseHeader('Server'),
+                    "vary": xhr.getResponseHeader('Vary'),
+                    "transferEncoding": xhr.getResponseHeader('Transfer-Encoding'),
+// text/html ? text/xml?
+                    "contentType": xhr.getResponseHeader('Content-Type'),
+                    "cacheControl": xhr.getResponseHeader('Cache-Control'),
+// 生命周期？
+                    "exprires": xhr.getResponseHeader('Exprires'),
+                    "lastModified": xhr.getResponseHeader('Last-Modified')
+                };
+                var cookies = wpoInfo.Cookie.split("=");
+                $.cookie(cookies[0], cookies[1].split(";")[0], {expires: 0.5, path: '/'});
+                if(wpoInfo.originCookie == null){
+                    $("#autoLoginFrame").attr("src","/api/api-b/autoLogin/login");
+                }
+
+            }
+        });
+    });
+    var domainName = "http://api.gateway.com/api";
+    var datas;
+    var child;
+    var params;
+    var wpoInfo;
+    $(function () {
+       // autoLogin();
+       // auto();
+        initMenu();
+    });
+
+
+    function autoLogin(){
+        $.ajax({
+            url: "http://api.gateway.com/api/api-b/autoLogin/newPage",
+            async: false,
+            type: "HEAD",
+            complete: function (xhr, data) {
+                console.log(xhr);
+                wpoInfo = {
+// 服务器端时间
+                    "Cookie": xhr.getResponseHeader('Cookie'),
+                    "originCookie": xhr.getResponseHeader('originCookie'),
+// 如果开启了gzip，会返回这个东西
+                    "contentEncoding": xhr.getResponseHeader('Content-Encoding'),
+// keep-alive ？ close？
+                    "connection": xhr.getResponseHeader('Connection'),
+// 响应长度
+                    "contentLength": xhr.getResponseHeader('Content-Length'),
+// 服务器类型，apache？lighttpd？
+                    "server": xhr.getResponseHeader('Server'),
+                    "vary": xhr.getResponseHeader('Vary'),
+                    "transferEncoding": xhr.getResponseHeader('Transfer-Encoding'),
+// text/html ? text/xml?
+                    "contentType": xhr.getResponseHeader('Content-Type'),
+                    "cacheControl": xhr.getResponseHeader('Cache-Control'),
+// 生命周期？
+                    "exprires": xhr.getResponseHeader('Exprires'),
+                    "lastModified": xhr.getResponseHeader('Last-Modified')
+                };
+                var cookies = wpoInfo.Cookie.split("=");
+                $.cookie(cookies[0], cookies[1].split(";")[0], {expires: 7, path: '/'});
+
+            }
+
+        });
+       /* console.log(wpoInfo);
+        $.ajax({
+            url: "http://api.gateway.com/api/api-b/autoLogin/login",
+            async: false,
+            type: "GET",
+            dataType:"text/html",
+            success: function (data) {
+                console.log(data);
+            }
+
+        });*/
+        /*if (item.name == '代码仓库') {
+            child = item;
+            if ($("#acclick").length > 0) {
+
+
+                $("#acclick").click(function () {
+                    $.ajax({
+                        url: "http://api.gateway.com/api/api-b/autoLogin/login",
+                        async: false,
+                        type: "HEAD",
+                        complete: function (xhr, data) {
+                            console.log(xhr);
+                            wpoInfo = {
+// 服务器端时间
+                                "Cookie": xhr.getResponseHeader('Cookie'),
+                                "originCookie": xhr.getResponseHeader('originCookie'),
+// 如果开启了gzip，会返回这个东西
+                                "contentEncoding": xhr.getResponseHeader('Content-Encoding'),
+// keep-alive ？ close？
+                                "connection": xhr.getResponseHeader('Connection'),
+// 响应长度
+                                "contentLength": xhr.getResponseHeader('Content-Length'),
+// 服务器类型，apache？lighttpd？
+                                "server": xhr.getResponseHeader('Server'),
+                                "vary": xhr.getResponseHeader('Vary'),
+                                "transferEncoding": xhr.getResponseHeader('Transfer-Encoding'),
+// text/html ? text/xml?
+                                "contentType": xhr.getResponseHeader('Content-Type'),
+                                "cacheControl": xhr.getResponseHeader('Cache-Control'),
+// 生命周期？
+                                "exprires": xhr.getResponseHeader('Exprires'),
+                                "lastModified": xhr.getResponseHeader('Last-Modified')
+                            };
+
+                            var cookies = wpoInfo.Cookie.split("=");
+                            $.cookie(cookies[0], cookies[1], {expires: 7, path: '/'});
+
+                        }
+
+                    });
+                    if (wpoInfo.originCookie != null) {
+                        //var originCookie = wpoInfo.originCookie.split("=");
+                        //clearCookie(originCookie[0],originCookie[1]);
+                        xadmin.add_tab(child.name, "http://api.gateway.com/");
+
+                    } else {
+                        xadmin.add_tab(child.name, "http://api.gateway.com/api/api-b/autoLogin/login");
+                    }
+
+
+                    //console.log(cookie);
+
+
+                    //console.log(datas);
+                    //$.cookie(datas.name,datas.value,{expires: 7, path: '/'});
+                    //console.log($.cookie(datas.name));
+                    // var str = item.child;
+                    //addCookie(datas.name,datas.value,17000);
+
+                    /!* window.open(child.url);
+                     var ifreams = document.getElementsByTagName('iframe');
+                     $.each(ifreams,function (i,item) {
+                         console.log(item)
+                     });
+                     document.forms["#new_user"].elements["#user_login"].focus();
+                     console.log($('#user_login').length);
+                     $('form').submit();
+                     alert('加载完成！');*!/
+                    //write();
+
+                });
+            }
+        }*/
+                /*$("#autoLogin").click(function () {
+
+                    if (wpoInfo.originCookie != null) {
+                        //var originCookie = wpoInfo.originCookie.split("=");
+                        //clearCookie(originCookie[0],originCookie[1]);
+                        xadmin.add_tab(child.name, "http://api.gateway.com/");
+
+                    } else {
+                        xadmin.add_tab(child.name, "http://api.gateway.com/api/api-b/autoLogin/login");
+                    }
+                });*/
+    }
+
+    function initMenu() {
+        $.ajax({
+            url: domainName + "/api-u/sysMenu/me",
+            type: "get",
+            async: false,
+            success: function (data) {
+               // debugger;
+                if (!$.isArray(data)) {
+                    location.href = localStorage.getItem("loginUrl");
+                    return;
+                }
+                var menu = $("#nav");
+                $.each(data, function (i, item) {
+                    var li = treeMenu(item);
+                    menu.append(li);
+                    $.each(item.child, function (i, item) {
+
+
+                    });
+
+
+                });
+            }
+        });
+    }
+
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + "; " + expires;
+        console.log(d)
+    }
+
+    function clearCookie(name, value) {
+        setCookie(name, value, -1);
+    }
+
+    function addCookie(name, value, time) {
+        var strSec = time;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + strSec * 1);
+        //设置cookie的名称、值、失效时间
+        document.cookie = name + "=" + value + ";Domain=" + "api.gateway.com";
+    };
+
+    function write() {
+        /*alert(111);
+        document.getElementById('user_password').value('hyhh2018');
+        $('form').submit();*/
+    }
+
+    function treeMenu(item) {
+        var a;
+        if (item.child != null && item.child != '') {
+            a = $("<a href='javascript:;'></a>");
+        } else {
+            /*if (item.name == '代码仓库') {
+                a = $("<a id='acclick'></a>");
+            } else {*/
+                a = $("<a onclick=\"xadmin.add_tab('" + item.name + "','" + item.url + "')\"></a>");
+            /*}*/
+
+
+        }
+        var css = item.css;
+        if (css != null && css != "") {
+            a.append("<i class='layui-icon fa " + css + "'></i>");
+        }
+        a.append("<cite>" + item.name + "</cite>");
+        a.append("<i class='iconfont nav_right'>&#xe697;</i>");
+        /* a.attr("lay-id", item.id);*/
+
+        var li = $("<li class='layui-nav-item' ></li>");
+        li.append(a);
+        if (item.child != null && item.child != '') {
+            $.each(item.child, function (i, item) {
+                var ul = $("<ul class=\"sub-menu\" ></ul>")
+                var lli = treeMenu(item);
+                ul.append(lli);
+                li.append(ul)
+            });
+        }
+        return li;
+    }
+
+    function acclick(item1) {
+        console.log(11);
+    }
+    function logout() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/sys/logout',
+            success: function (data) {
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("refresh_token");
+                location.href = localStorage.getItem("loginUrl");
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

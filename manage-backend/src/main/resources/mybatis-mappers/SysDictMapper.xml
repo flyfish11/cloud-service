@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.backend.dao.SysDictDao">
+    <sql id="where">
+        <where>
+            and t.pid=0
+            <if test="name != null and name != ''">
+                and t.name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </sql>
+    <select id="count" resultType="int">
+        select count(*) from sys_dict t
+        <include refid="where"/>
+    </select>
+    <select id="selectEntity" resultType="com.cloud.backend.model.SysDict">
+        select *
+        from sys_dict t
+        where t.code = #{code}
+          and name = #{name}
+    </select>
+    <select id="list" resultType="com.cloud.backend.model.SysDict">
+        SELECT
+        q.id,
+        q.tips,
+        q.name,
+        GROUP_CONCAT(`books` SEPARATOR ',') as datas
+        FROM
+        (
+        SELECT
+        c.id,
+        c.tips,
+        c.name,
+        concat(c.num,c.notes) as books
+        FROM
+        (
+        SELECT
+        a.id,
+        a.tips,
+        q.num,
+        q.pid,
+        a.NAME,
+        q.NAME as notes
+        FROM
+        ( SELECT t.* FROM sys_dict t WHERE pid = 0 ) a
+        LEFT JOIN ( SELECT * FROM sys_dict ) q ON a.id = q.pid
+        ) c
+        )q
+        <where>
+            <if test="name != null and name != ''">
+                q.name like concat('%', #{name}, '%')
+            </if>
+        </where>
+        group by q.id
+        order by q.id desc
+        <if test="start != null and start >= 0 and length != null and length > 0">
+            limit #{start}, #{length}
+        </if>
+    </select>
+    <update id="updateEntity" parameterType="com.cloud.backend.model.SysDict">
+        update sys_dict t
+        <set>
+            <if test="name != null and name != ''">
+                t.name = #{name},
+            </if>
+            <if test="num != null and num != ''">
+                t.num = #{num},
+            </if>
+            <if test="pid != null and pid != ''">
+                t.pid = #{pid},
+            </if>
+            <if test="tips != null and tips != ''">
+                t.tips = #{tips},
+            </if>
+            <if test="code != null and code != ''">
+                t.code = #{code}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <sql id="Base_Column_List">
+            id,
+            num,
+            pid,
+            name,
+            tips,
+            code
+    </sql>
+
+    <select id="selectByCode" resultType="com.cloud.backend.model.SysDict">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dict
+        where code=#{code,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryLists" resultType="com.cloud.backend.model.SysDict">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dict
+        where pid=#{pid,jdbcType=VARCHAR}
+        order by num
+    </select>
+</mapper>

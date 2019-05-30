@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cloud.backend.dao.ApplicationDao">
+    <resultMap id="BaseResultMap" type="com.cloud.backend.model.Application">
+        <!--@mbg.generated-->
+        <id column="applicationId" jdbcType="VARCHAR" property="applicationId" />
+        <result column="applicationName" jdbcType="VARCHAR" property="applicationName" />
+        <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        applicationId, applicationName, createTime, updateTime
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List" />
+        from application
+        where applicationId = #{applicationid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        <!--@mbg.generated-->
+        delete from application
+        where applicationId = #{applicationid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.cloud.backend.model.Application">
+        <!--@mbg.generated-->
+        insert into application (applicationId, applicationName, createTime,
+        updateTime)
+        values (#{applicationid,jdbcType=VARCHAR}, #{applicationname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
+        #{updatetime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.cloud.backend.model.Application">
+        <!--@mbg.generated-->
+        insert into application
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="applicationid != null">
+                applicationId,
+            </if>
+            <if test="applicationname != null">
+                applicationName,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="updatetime != null">
+                updateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="applicationid != null">
+                #{applicationid,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationname != null">
+                #{applicationname,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+
+    <!--auto generated Code-->
+
+    <select id="selectApplication" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from application
+        where 1=1
+        <if test="applicationId!=null and applicationId != '' ">
+            and applicationId = #{applicationId,jdbcType=VARCHAR}
+        </if>
+        <if test="applicationName!=null and applicationName!= '' ">
+            and applicationName = #{applicationName,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime!=null">
+            and createTime = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateTime!=null">
+            and updateTime=#{updateTime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+</mapper>
+

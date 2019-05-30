@@ -1,0 +1,79 @@
+spring:
+  mvc:
+    servlet:
+      load-on-startup: 1
+  zipkin:
+    base-url: http://localhost:9411
+  rabbitmq:
+    host: local.rabbitmq.com
+    port: 5672
+    username: cloud-dev
+    password: cloud-dev
+    virtual-host: /
+logging:
+  level:
+    root: info
+    com.cloud: debug
+  file: logs/${spring.application.name}.log
+zuul:
+  ignored-services: '*'
+  sensitiveHeaders: 
+  routes:
+    oauth:
+      path: /api/api-o/**
+      serviceId: oauth-center
+    organize:
+      path: /api/api-or/**
+      serviceId: organize-center
+    api-u:
+      path: /api/api-u/**
+      serviceId: user-center
+    backend:
+      path: /api/api-b/**
+      serviceId: manage-backend
+    log:
+      path: /api/api-l/**
+      serviceId: log-center
+    file:
+      path: /api/api-f/**
+      serviceId: file-center
+    sms:
+      path: /api/api-n/**
+      serviceId: notification-center
+    api-appmanage:
+      path: /api/api-appmanage/**
+      serviceId: appmanage-center
+    dictionary-table:
+      path: /api/api-dt/**
+      serviceId: dictionary-table
+    work-flow:
+      path: /api/api-wf/**
+      serviceId: work-flow
+    wcp-center:
+      path: /api/api-wc/**
+      serviceId: wcp-center
+    spring_dev:
+      path: /api/api-spr/**
+      serviceId: spring_dev
+    dev-app:
+      path: /api/api-dev/**
+      serviceId: dev-app
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+  add-proxy-headers: true
+  ribbon:
+    eager-load:
+      enabled: true
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+cron:
+  black-ip: 0 0/5 * * * ?

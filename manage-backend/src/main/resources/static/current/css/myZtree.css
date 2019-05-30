@@ -1,0 +1,24 @@
+.tree-content {
+    display: none;
+    position: absolute;
+    height: 300px;
+    left: 0 !important;
+    top: 38px !important;
+    background: #ffffff;
+    z-index: 9999999;
+    border: 1px solid #C9C9C9 !important;
+    overflow-y: auto;
+}
+
+.layui-layout-admin .layui-body {
+}
+
+.layui-layout-admin .layui-side {
+    bottom: 28px;
+}
+
+.layui-layout-admin .layui-footer {
+    left: 0;
+    height: 28px;
+    line-height: 24px;
+}
